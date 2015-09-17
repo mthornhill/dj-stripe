@@ -640,7 +640,7 @@ class Charge(StripeCharge):
             if invoice:
                 charge.invoice = invoice
         except Invoice.DoesNotExist:
-            pass
+            logger.warning("No invoice {0} found for charge {1}".format(data.get('invoice'), data.get('id')))
 
         charge.save()
         return charge
